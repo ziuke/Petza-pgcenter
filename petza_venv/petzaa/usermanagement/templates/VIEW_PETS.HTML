@@ -1,0 +1,32 @@
+{% include 'header.html' %}
+{% load static %}
+
+<div class="container mt-5">
+    <h2>Available Pets</h2>
+
+    <!-- Search Form -->
+    <form method="get" class="form-inline mb-4">
+        <input type="text" name="search" class="form-control mr-2" placeholder="Search by name..." value="{{ query }}">
+        <button type="submit" class="btn btn-primary">Search</button>
+        <a href="{% url 'view_pets' %}" class="btn btn-secondary ml-2">Reset</a>
+    </form>
+
+    <div class="row">
+        {% for pet in pets %}
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                {% if pet.image %}
+                    <img src="{{ pet.image.url }}" class="card-img-top" alt="{{ pet.name }}">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ pet.name }} - {{ pet.breed }}</h5>
+                    <p class="card-text">Age: {{ pet.age }} | Health: {{ pet.health_status }}</p>
+                    <a href="{% url 'request_adoption' pet.id %}" class="btn btn-success">Adopt</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+            <p>No pets found.</p>
+        {% endfor %}
+    </div>
+</div>

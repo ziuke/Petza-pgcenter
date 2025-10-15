@@ -1,0 +1,33 @@
+{% load static %}
+{% include 'header.html' %}
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">List of Adopters</h2>
+    <table class="table table-bordered table-striped">
+        <thead class="thead-light">
+            <tr>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Location</th>
+                <th>Contact</th>
+                <th>Date Joined</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for adopter in adopters %}
+            <tr>
+                <td>{{ adopter.username }}</td>
+                <td>{{ adopter.email }}</td>
+                <td>{{ adopter.location }}</td>
+                <td>{{ adopter.phone }}</td>
+                <td>{{ adopter.date_joined|date:"Y-m-d" }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4" class="text-center">No adopters found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

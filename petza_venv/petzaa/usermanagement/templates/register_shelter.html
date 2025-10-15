@@ -1,0 +1,22 @@
+{% load static %}
+{% include 'header.html' %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Shelter Registration</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/register.css' %}">
+</head>
+<body>
+<div class="register-page">
+    <div class="form-container">
+        <h2 class="text-center">Shelter Registration</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-success btn-block">Register</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

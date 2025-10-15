@@ -1,0 +1,107 @@
+{% load static %}
+{% include 'header.html' %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+  <!-- about section -->
+
+  <section class="about_section layout_padding">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="img-box">
+            <img src="{% static 'images/about-img.jpg' %}" alt="" />
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="detail-box">
+            <div class="heading_container">
+              <h2>
+                About Us
+                <hr>
+              </h2>
+            </div>
+            <p>
+             At PetZaa, we believe every animal deserves a chance to live a happy and healthy life. Our mission is to connect loving families with homeless pets in need of care and companionship. We work with shelters, rescue organizations, and volunteers to ensure every adoption is safe, responsible, and filled with compassion. Whether you’re looking for a playful puppy, a gentle kitten, or a loyal companion, we’re here to help you find your perfect match. Together, we can create a world where every pet finds a forever home filled with love and joy.
+            </p>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- end about section -->
+
+  <!-- wedo section -->
+
+  <section class="wedo_section layout_padding-bottom">
+    <div class="container">
+      <div class="heading_container heading_center">
+        <h2>
+          <hr>
+          What We Do
+          <hr>
+        </h2>
+        <p>
+          We provide complete pet solutions — from adoption and care to expert training — to ensure every pet lives a happy, healthy, and loving life.
+        </p>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="box">
+            <div class="img-box">
+              <img src="{% static 'images/s1.png' %}" alt="">
+            </div>
+            <div class="detail-box">
+              <h6>
+                Pet Adoption
+              </h6>
+              <p>
+                Find your perfect furry companion through our safe and trusted adoption process. We help connect you with pets who are ready to be part of a loving family.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="box">
+            <div class="img-box">
+              <img src="{% static 'images/s2.png' %}" alt="">
+            </div>
+            <div class="detail-box">
+              <h6>
+                Pet Care
+              </h6>
+              <p>
+                Our pet care services ensure your pets stay healthy, active, and full of life. From grooming to regular checkups, we treat every pet with the love and attention they deserve.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="box">
+            <div class="img-box">
+              <img src="{% static 'images/s3.png' %}" alt="">
+            </div>
+            <div class="detail-box">
+              <h6>
+                Pet Training
+              </h6>
+              <p>
+                We offer personalized training programs that help pets learn good behavior and social skills. Our trainers use positive methods to build trust and strengthen the bond between you and your pet.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- end wedo section -->
+
+
+{% include 'footer.html' %}
+</body>
+
+</html>

@@ -1,0 +1,27 @@
+
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <img src="{{ pet.image.url }}" class="card-img-top" alt="{{ pet.name }}">
+                <div class="card-body">
+                    <h3 class="card-title">{{ pet.name }}</h3>
+                    <p><strong>Breed:</strong> {{ pet.breed }}</p>
+                    <p><strong>Age:</strong> {{ pet.age }} years</p>
+                    <p><strong>Health Status:</strong> {{ pet.health_status }}</p>
+                    <p><strong>Shelter:</strong> {{ pet.shelter.username }}</p>
+
+                    <form method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-success btn-block">Request Adoption</button>
+                    </form>
+                    <a href="{% url 'view_pets' %}" class="btn btn-secondary btn-block mt-2">Back to Pets</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

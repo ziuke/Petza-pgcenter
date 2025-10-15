@@ -1,0 +1,55 @@
+{% include 'header.html' %}
+{% load static %}
+{% block content %}
+<div class="container mt-5">
+    <h2>My Pets</h2>
+    <a href="{% url 'add_pet' %}" class="btn btn-primary mb-3">Add New Pet</a>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Pet ID</th>
+                <th>Name</th>
+                <th>Breed</th>
+                <th>Age</th>
+                <th>Health Status</th>
+                <th>Foster Home</th>
+                <th>Image</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pet in pets %}
+            <tr>
+                <td>{{ pet.pet_id }}</td>
+                <td>{{ pet.name }}</td>
+                <td>{{ pet.breed }}</td>
+                <td>{{ pet.age }}</td>
+                <td>{{ pet.health_status }}</td>
+                <td>
+                  {{ pet.foster_home_name }}<br>
+                  ID: {{ pet.foster_home_id }}
+                </td>
+                <td>
+                    {% if pet.image %}
+                        <img src="{{ pet.image.url }}" alt="{{ pet.name }}" width="100">
+                    {% else %}
+                        No Image
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{% url 'edit_pet' pet.pet_id %}" class="btn btn-warning btn-sm">Edit</a>
+                    <form action="{% url 'delete_pet' pet.pet_id %}" method="POST" style="display:inline;">
+                     {% csrf_token %}
+                     <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="8" class="text-center">No pets added yet.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

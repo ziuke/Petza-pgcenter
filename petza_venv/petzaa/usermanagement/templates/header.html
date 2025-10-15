@@ -1,0 +1,111 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="image/x-icon">
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+
+  <title>Petlor</title>
+
+  <!-- font awesome style -->
+  <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet" />
+  <!-- lightbox -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" rel="stylesheet" />
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}" />
+  <!-- fonts style -->
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,700|Poppins:400,700|Roboto:400,700&display=swap" rel="stylesheet" />
+  <!-- Custom styles for this template -->
+  <link href="{% static 'css/style.css' %}" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="{% static 'css/responsive.css' %}" rel="stylesheet" />
+</head>
+
+<body>
+  <div class="hero_area">
+    <!-- header section starts -->
+    <header class="header_section">
+      <div class="container">
+        <nav class="navbar navbar-expand-lg custom_nav-container">
+          <a class="navbar-brand" href="index">
+            <img src="{% static 'images/logo.png' %}" alt="Petlor Logo" />
+            <span>Petlor</span>
+          </a>
+
+          <button class="navbar-toggler" type="button" data-toggle="collapse"
+                  data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                  aria-expanded="false" aria-label="Toggle navigation">
+            <span class=""> </span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto">
+
+              {% if request.session.ut == "admin" %}
+                <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="/services">Services</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'manage_adopters' %}">Adopters</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'manage_shelters' %}">Shelters</a></li>
+                
+                <li class="nav-item"><a class="nav-link" href="/do_logout">Logout</a></li>
+
+              {% elif request.session.ut == "shelter" %}
+                <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="/services">Services</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'my_pets' %}">My Pets</a></li>
+                
+                <li class="nav-item"><a class="nav-link" href="/do_logout">Logout</a></li>
+
+              {% elif request.session.ut == "adopter" %}
+                <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="/services">Services</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'view_pets' %}">Available Pets</a></li>
+               
+                
+                <li class="nav-item"><a class="nav-link" href="/do_logout">Logout</a></li>
+
+              {% else %}
+                <!-- Guest users -->
+                <li class="nav-item active"><a class="nav-link" href="/">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="/services">Services</a></li>
+                <li class="nav-item"><a class="nav-link" href="/gallery">Gallery</a></li>
+                <li class="nav-item"><a class="nav-link pr-lg-0" href="/contact">Contact Us</a></li>
+              {% endif %}
+            </ul>
+
+            <!-- Register / Login Buttons for Guests -->
+            {% if request.session.ut != "admin" and request.session.ut != "adopter" and request.session.ut != "shelter" %}
+              <ul class="d-flex align-items-center list-unstyled mb-0 ml-4">
+                <li class="nav-item dropdown mx-2">
+                  <a class="btn btn-success dropdown-toggle text-white px-3 py-1 rounded" href="#" id="registerDropdown"
+                     role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Register
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="registerDropdown" style="background-color: #cce5ff;">
+                    <a class="dropdown-item" href="{% url 'register_adopter' %}">Adopter</a>
+                    <a class="dropdown-item" href="{% url 'register_shelter' %}">Shelter</a>
+                  </div>
+                </li>
+                <li class="nav-item mx-2">
+                  <a href="do_login/" class="btn btn-success text-white px-3 py-1 rounded">Login</a>
+                </li>
+              </ul>
+            {% endif %}
+          </div>
+        </nav>
+      </div>
+    </header>
+    <!-- header section ends -->

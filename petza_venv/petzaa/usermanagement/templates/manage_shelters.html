@@ -1,0 +1,35 @@
+{% load static %}
+{% include 'header.html' %}
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">List of Shelters</h2>
+    <table class="table table-bordered table-striped">
+        <thead class="thead-light">
+            <tr>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Location</th>
+                <th>Contact</th>
+                <th>sheltername</th>
+                <th>Date Joined</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for shelter in shelters %}
+            <tr>
+                <td>{{ shelter.username }}</td>
+                <td>{{ shelter.email }}</td>
+                <td>{{ shelter.location }}</td>
+                <td>{{ shelter.phone }}</td>
+                <td>{{ shelter.shelter_name }}</td>
+                <td>{{ shelter.date_joined|date:"Y-m-d" }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" class="text-center">No shelters found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

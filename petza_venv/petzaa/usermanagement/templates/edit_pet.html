@@ -1,0 +1,21 @@
+{% include 'header.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">
+        {% if pet %}Edit Pet: {{ pet.name }}{% else %}Add New Pet{% endif %}
+    </h2>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <!-- Display form fields nicely with Bootstrap -->
+        {{ form.as_p }}
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-success">Save</button>
+        <a href="{% url 'my_pets' %}" class="btn btn-secondary ml-2">Cancel</a>
+    </form>
+</div>
+{% endblock %}
