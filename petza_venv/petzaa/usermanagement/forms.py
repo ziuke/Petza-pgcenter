@@ -43,3 +43,23 @@ class AdoptionRequestForm(forms.ModelForm):
     class Meta:
         model = AdoptionRequest
         fields = ['pet']
+
+class ProfileForm(forms.ModelForm):
+    
+    class Meta:
+        model = Register
+        fields = ['username', 'location', 'phone', 'profile_image']  # default fields
+
+from django import forms
+from .models import Message, Register
+
+
+class MessageForm(forms.ModelForm):
+    receiver = forms.ModelChoiceField(queryset=Register.objects.all(), required=False, widget=forms.HiddenInput())
+
+    class Meta:
+        model = Message
+        fields = ['content', 'receiver']
+        widgets = {
+            'content': forms.Textarea(attrs={'rows': 2, 'placeholder': 'Type your message...'}),
+        }

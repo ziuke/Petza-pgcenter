@@ -1,0 +1,38 @@
+{% load static %}
+{% include 'header.html' %}
+
+<div class="container mt-5 mb-5">
+    <div class="card shadow-lg p-4 rounded-4" style="max-width:700px; margin:auto;">
+        <h2 class="text-center text-success mb-4">{{ request.user.username }}'s Profile</h2>
+
+        <!-- Profile Image -->
+        <div class="text-center mb-4">
+            {% if profile.profile_image %}
+                <img src="{{ profile.profile_image.url }}" class="rounded-circle shadow-sm" 
+                     style="width:120px; height:120px; object-fit:cover;">
+            {% else %}
+                <img src="{% static 'images/default-profile.png' %}" class="rounded-circle shadow-sm" 
+                     style="width:120px; height:120px; object-fit:cover;">
+            {% endif %}
+        </div>
+
+        <!-- Common Fields -->
+        <p><strong>Username:</strong> {{ request.user.username }}</p>
+        <p><strong>User Type:</strong> {{ request.user.user_type|capfirst }}</p>
+        <p><strong>Email:</strong> {{ request.user.email }}</p>
+        <p><strong>Phone:</strong> {{ request.user.phone }}</p>
+        <p><strong>Location:</strong> {{ request.user.location }}</p>
+
+        <!-- Specific Fields -->
+        {% if profile_type == 'shelter' %}
+            <p><strong>Shelter Name:</strong> {{ profile.shelter_name }}</p>
+            
+        {% elif profile_type == 'adopter' %}
+           
+        {% endif %}
+
+        <div class="text-center mt-4">
+            <a href="{% url 'edit_profile' %}" class="btn btn-success px-4">Edit Profile</a>
+        </div>
+    </div>
+</div>

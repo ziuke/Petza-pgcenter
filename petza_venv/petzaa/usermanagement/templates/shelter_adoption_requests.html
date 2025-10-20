@@ -1,0 +1,62 @@
+{% load static %}
+{% include 'header.html' %}
+<link rel="stylesheet" href="{% static 'css/adoption_requests.css' %}">
+{% block content %}
+<div class="container mt-5">
+  <h2 class="text-center text-success mb-4">Adoption Requests for Your Pets</h2>
+
+  {% if adoption_requests %}
+  <table class="table table-bordered table-striped text-center">
+    <thead class="table-success">
+      <tr>
+        <th>Pet</th>
+        <th>Adopter</th>
+        <th>Date</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for req in adoption_requests %}
+      <tr>
+        <td>{{ req.pet.name }}</td>
+        <td>{{ req.adopter.username }}</td>
+        <td>{{ req.created_at|date:"d M Y, H:i" }}</td>
+        <td>
+          <span class="badge
+            {% if req.status == 'Applied' %}bg-warning text-dark
+            {% elif req.status == 'Reviewing' %}bg-info text-dark
+            {% elif req.status == 'Approved' %}bg-success
+            {% elif req.status == 'Rejected' %}bg-danger
+            {% elif req.status == 'Adopted' %}bg-secondary
+            {% endif %}">
+            {{ req.status }}
+          </span>
+        </td>
+        <td>
+          {% if req.status == 'Applied' %}
+            <a href="{% url 'update_adoption_status' req.id 'Reviewing' %}" class="btn btn-sm btn-primary">Start Review</a>
+
+          {% elif req.status == 'Reviewing' %}
+            <a href="{% url 'update_adoption_status' req.id 'Approved' %}" class="btn btn-sm btn-success">Approve</a>
+            <a href="{% url 'update_adoption_status' req.id 'Rejected' %}" class="btn btn-sm btn-danger">Reject</a>
+
+          {% elif req.status == 'Approved' %}
+            <a href="{% url 'update_adoption_status' req.id 'Adopted' %}" class="btn btn-sm btn-secondary">Mark Adopted</a>
+
+          {% elif req.status == 'Rejected' %}
+            <span class="text-danger">Request Rejected</span>
+
+          {% elif req.status == 'Adopted' %}
+            <span class="text-secondary">Pet Adopted</span>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p class="text-center text-muted">No adoption requests yet.</p>
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,72 @@
+{% load static %}
+{% include 'header.html' %}
+<link rel="stylesheet" href="{% static 'css/edit_profile.css' %}">
+
+<div class="container mt-5 mb-5">
+    <div class="card shadow-lg p-4 rounded-4" style="max-width:700px; margin:auto;">
+        <h2 class="text-center text-success mb-4">
+            {% if profile_type == 'shelter' %}Edit Shelter Profile{% elif profile_type == 'adopter' %}Edit Adopter Profile{% endif %}
+        </h2>
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <!-- Profile Image Preview -->
+            <div class="text-center mb-4">
+                {% if form.instance.profile_image %}
+                    <img src="{{ form.instance.profile_image.url }}" id="profilePreview" class="rounded-circle shadow-sm" 
+                         style="width:120px; height:120px; object-fit:cover;">
+                {% else %}
+                    <img src="{% static 'images/default-profile.png' %}" id="profilePreview" class="rounded-circle shadow-sm" 
+                         style="width:120px; height:120px; object-fit:cover;">
+                {% endif %}
+                <br>
+                <label class="btn btn-outline-success mt-3">
+                    Change Picture
+                    {{ form.profile_image }}
+                </label>
+            </div>
+
+            <!-- Form Fields -->
+            {% for field in form %}
+                {% if field.name != 'profile_image' %}
+                    <div class="mb-3">
+                        <label class="form-label">{{ field.label }}</label>
+                        {{ field }}
+                        {% if field.errors %}
+                            <div class="text-danger small">{{ field.errors }}</div>
+                        {% endif %}
+                    </div>
+                {% endif %}
+            {% endfor %}
+
+            <!-- Common fields from Register -->
+           
+
+            <div class="text-center mt-4">
+                <button type="submit" class="btn btn-success px-4">Save Changes</button>
+                <a href="{% url 'profile' %}" class="btn btn-secondary px-4 ms-2">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const fileInput = document.querySelector('input[name="profile_image"]');
+    const preview = document.getElementById('profilePreview');
+
+    if (fileInput) {
+        fileInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if(file){
+                const reader = new FileReader();
+                reader.onload = function(event){
+                    preview.src = event.target.result;
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+    }
+});
+</script>

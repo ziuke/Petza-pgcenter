@@ -1,0 +1,104 @@
+
+/* .container {
+    margin-top: 50px;
+    max-width: 1000px;
+} */
+
+/* Page Heading */
+h2 {
+    background-color: #d0e7ff; /* light blue background */
+    color: #28a745; /* green text */
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Subheading */
+.subheading {
+    background-color: #d0e7ff; /* light blue background */
+    color: #0d3b66; /* dark blue text */
+    font-size: 1rem;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+/* Table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff; /* white table background */
+}
+
+thead {
+    background-color: #d0e7ff; /* light blue header */
+    color: #000000; /* black text */
+}
+
+thead th {
+    padding: 12px;
+    text-align: left;
+    font-weight: bold;
+}
+
+tbody td {
+    padding: 10px;
+    color: #000000; /* black text */
+    border-bottom: 1px solid #ccc;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f2f2f2; /* alternate row color */
+}
+
+/* Empty row */
+tbody tr td.text-center {
+    color: #dc3545; /* red text for no data */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    h2 {
+        font-size: 1.5rem;
+        padding: 10px;
+    }
+
+    .subheading {
+        font-size: 0.9rem;
+        padding: 8px;
+    }
+
+    table thead, table tbody, table th, table td {
+        display: block;
+        width: 100%;
+    }
+
+    table thead tr {
+        display: none;
+    }
+
+    table tbody td {
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+    }
+
+    table tbody td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 10px;
+        width: 45%;
+        padding-left: 10px;
+        font-weight: bold;
+        text-align: left;
+    }
+}
+
+/* Optional: hover effect on table rows */
+tbody tr:hover {
+    background-color: #e0f7e9; /* light green highlight */
+}

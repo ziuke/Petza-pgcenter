@@ -13,6 +13,11 @@
         <h2 class="text-center">Shelter Registration</h2>
         <form method="post">
             {% csrf_token %}
+            {% for error in field.errors %}
+                    <small class="error">{{ error }}</small>
+                {% endfor %}
+            
+        
             {{ form.as_p }}
             <button type="submit" class="btn btn-success btn-block">Register</button>
         </form>

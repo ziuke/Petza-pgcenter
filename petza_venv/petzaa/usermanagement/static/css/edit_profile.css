@@ -1,0 +1,114 @@
+/* Page background */
+
+/* Card / form box */
+.card {
+    background-color: #d0e7ff; /* light blue box */
+    padding: 40px 30px;
+    border-radius: 15px;
+    max-width: 700px;
+    width: 100%;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    box-sizing: border-box;
+}
+
+/* Heading left-aligned */
+.card h2 {
+    color: #28a745; /* green */
+    font-weight: bold;
+    margin-bottom: 30px;
+    text-align: left; /* left aligned */
+    font-size: 1.8rem;
+}
+
+/* Profile Image Preview */
+#profilePreview {
+    border: 3px solid #28a745;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Change picture label button */
+label.btn {
+    cursor: pointer;
+}
+
+/* Form Labels */
+.form-label {
+    font-weight: 500;
+    margin-bottom: 5px;
+    display: block;
+}
+
+/* Inputs, selects, textarea */
+input, select, textarea {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    font-size: 15px;
+    box-sizing: border-box;
+}
+
+/* Buttons container centered */
+.text-center {
+    text-align: center;
+}
+
+/* Save button styling */
+.btn-success {
+    background-color: #28a745;
+    color: #fff;
+    font-weight: bold;
+    padding: 10px 35px;
+    border-radius: 8px;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+    transform: scale(1.05);
+}
+
+/* Cancel button styling */
+.btn-secondary {
+    background-color: #a8e6a3; /* light green */
+    color: #155724;
+    text-decoration: none;
+    padding: 10px 35px;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background-color: #76c776;
+    color: white;
+    transform: scale(1.05);
+}
+
+/* Make buttons full width match form inputs */
+.text-center .btn-success,
+.text-center .btn-secondary {
+    min-width: 200px; /* uniform width for buttons */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .card {
+        padding: 25px 20px;
+    }
+
+    .card h2 {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+        text-align: left;
+    }
+
+    .text-center .btn-success,
+    .text-center .btn-secondary {
+        width: 100%; /* full width on mobile */
+        margin-bottom: 10px;
+    }
+}

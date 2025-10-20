@@ -1,0 +1,135 @@
+/* Container */
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+
+/* Heading */
+h2 {
+    background-color: #d0e7ff; /* light blue background */
+    color: #28a745; /* green text */
+    text-align: center;
+    padding: 15px 0;
+    border-radius: 8px;
+    font-weight: 700;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* Search form */
+form.form-inline {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+form input.form-control {
+    width: 250px;
+}
+
+form button, form a.btn {
+    height: 38px;
+}
+
+/* Pet cards */
+.card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 350px; /* same height for all cards */
+}
+
+.card-img-top {
+    object-fit: cover;
+    height: 180px; /* fixed image height */
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+/* Card body */
+.card-body {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: calc(100% - 180px); /* remaining space below image */
+}
+
+.card-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.card-text {
+    font-size: 0.95rem;
+    margin-bottom: 15px;
+}
+
+/* Buttons inside card */
+.card .btn {
+    flex: 1;
+    margin-right: 5px;
+    font-size: 0.9rem;
+}
+
+.card .btn:last-child {
+    margin-right: 0;
+}
+
+/* Button colors */
+.btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+    border-color: #218838;
+}
+
+.btn-info {
+    background-color: #0dcaf0;
+    border-color: #0dcaf0;
+    color: #fff;
+}
+
+.btn-info:hover {
+    background-color: #0aa3c4;
+    border-color: #0aa3c4;
+}
+
+/* Ensure equal height in row */
+.row .col-md-4 {
+    display: flex;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .card {
+        height: 320px;
+    }
+}
+
+@media (max-width: 768px) {
+    .card {
+        height: auto;
+    }
+}
+
+@media (max-width: 576px) {
+    form input.form-control {
+        width: 100%;
+    }
+    
+    .d-flex.justify-content-between {
+        flex-direction: column;
+        gap: 5px;
+    }
+}

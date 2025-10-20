@@ -1,0 +1,102 @@
+{% load static %}
+{% include 'header.html' %}
+
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center text-success mb-4">Tracking: {{ adoption_request.pet.name }}</h2>
+
+    <div class="position-relative mb-5" style="height:300px; margin-left: 300px; margin-top: 100px;">
+        <!-- Horizontal lines -->
+        <div class="line {% if current_step in 'Reviewing,Approved,Adopted,Rejected' %}green{% else %}grey{% endif %}" style="left:-30px; width:125px; top:100px;"></div>
+        <div class="line {% if current_step in 'Approved,Adopted,Rejected' %}green{% elif current_step == 'Rejected' %}red{% else %}grey{% endif %}" style="left:155px; width:100px; top:75px;"></div>
+
+        <!-- Branch lines -->
+        <div class="line {% if current_step in 'Approved,Adopted' %}green{% else %}grey{% endif %}" style="left:250px; width:150px; top:25px; transform: rotate(-20deg);"></div> <!-- Approved branch -->
+        <div class="line {% if current_step == 'Rejected' %}red{% else %}grey{% endif %}" style="left:250px; width:150px; top:50px; transform: rotate(20deg);"></div>  <!-- Rejected branch -->
+
+        <!-- Vertical lines after branches -->
+        <div class="line {% if current_step == 'Adopted' %}green{% else %}grey{% endif %}" style="left:450px; width:100px; top:-50px;"></div> <!-- Approved → Adopted -->
+
+        <!-- Step dots -->
+        <div class="dot green" style="left:-70px; top:70px;">Applied</div>
+        <div class="dot {% if current_step in 'Approved,Adopted,Reviewing,Rejected' %}green{% else %}grey{% endif %}" style="left:115px; top:70px;">Reviewing</div>
+
+        <div class="dot {% if current_step in 'Approved,Adopted' %}green{% endif %}" style="left:410px; top:20px;">Approved</div>
+        <div class="dot {% if current_step == 'Adopted' %}green{% endif %}" style="left:570px; top:25px;">Adopted</div>
+
+        <div class="dot {% if current_step == 'Rejected' %}red{% else %}grey{% endif %}" style="left:410px; top:125px;">Rejected</div>
+
+        <!-- Pet icon -->
+        <img src="{% static 'icons/'|add:pet_icon|add:'.png' %}" id="petIcon" width="50" height="50" style="position:absolute; top:35px; left:0px; transition: all 1s ease;">
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="{% url 'my_adoptions' %}" class="btn btn-secondary">Back to My Adoptions</a>
+    </div>
+</div>
+
+<style>
+.dot {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #e0e0e0;
+    position: absolute;
+    text-align: center;
+    padding-top:20px;
+    font-size: 10px;
+    font-weight: bold;
+    color: #555;
+    border: 2px solid #ccc;
+}
+
+.green {
+    background-color: #198754;
+    color: white;
+    border-color: #14532d;
+}
+
+.red {
+    background-color: #dc3545;
+    color: white;
+    border-color: #842029;
+}
+
+.grey {
+    background-color: #ccc;
+    color: #555;
+    border-color: #aaa;
+}
+
+.line {
+    position: relative;
+    margin-top: 20px;
+    margin-left: 20px;
+    height: 5px;
+    /* background-color: #ccc; */
+}
+</style>
+
+<script>
+// Pet icon position mapping
+const steps = {
+    'Applied': {left:-70, top:45},
+    'Reviewing': {left:150, top:45},
+    'Approved': {left:400, top:-10},
+    'Adopted': {left:560, top:0},
+    'Rejected': {left:400, top:100},
+    'Reject Adoption': {left:500, top:100}
+};
+
+window.onload = function() {
+    const petIcon = document.getElementById('petIcon');
+    const currentStep = "{{ current_step }}";
+    if (steps[currentStep]) {
+        petIcon.style.left = steps[currentStep].left + "px";
+        petIcon.style.top = steps[currentStep].top + "px";
+    }
+};
+</script>
+
+{% endblock %}

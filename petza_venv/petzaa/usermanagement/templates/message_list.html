@@ -1,0 +1,44 @@
+{% include 'header.html' %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/msg_list.css' %}">
+
+<div class="container mt-5">
+    <h3 class="text-center mb-4">Your Conversations</h3>
+
+    {% if pet_messages %}
+        <div class="list-group">
+            {% for pet, msg in pet_messages %}
+                <a href="{% url 'chat_view' pet.id %}" 
+                   class="list-group-item list-group-item-action d-flex align-items-center justify-content-between">
+                    
+                    <div class="d-flex align-items-center">
+                        {% if pet.image %}
+                            <img src="{{ pet.image.url }}" alt="{{ pet.name }}" 
+                                 class="rounded-circle me-3" width="50" height="50">
+                        {% else %}
+                            <div class="bg-secondary rounded-circle me-3" 
+                                 style="width:50px; height:50px;"></div>
+                        {% endif %}
+                        <div>
+                            <strong>{{ pet.name }}</strong><br>
+                            {% if request.user == pet.shelter %}
+                                <small class="text-muted">Chat with {{ pet.adopter.username }}</small>
+                            {% else %}
+                                <small class="text-muted">Chat with {{ pet.shelter.username }}</small>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    {% if msg %}
+                    <div class="text-end">
+                        <small class="text-muted d-block">{{ msg.content|truncatewords:6 }}</small>
+                        <small class="text-muted">{{ msg.timestamp|date:"H:i" }}</small>
+                    </div>
+                    {% endif %}
+                </a>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-center text-muted">No active messages yet.</p>
+    {% endif %}
+</div>

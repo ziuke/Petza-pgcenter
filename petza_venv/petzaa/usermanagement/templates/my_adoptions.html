@@ -1,0 +1,47 @@
+{% load static %}
+{% include 'header.html' %}
+<link rel="stylesheet" href="{% static 'css/adpoter_adoptionreq.css' %}">
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center text-primary mb-4">My Adoption Requests</h2>
+
+    {% if adoptions %}
+    <table class="table table-bordered table-striped text-center">
+        <thead class="table-primary">
+            <tr>
+                <th>Pet</th>
+                <th>Shelter</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for req in adoptions %}
+            <tr>
+                <td>{{ req.pet.name }}</td>
+                <td>{{ req.pet.shelter.username }}</td>
+                <td>{{ req.created_at|date:"d M Y, H:i" }}</td>
+                <td>
+                    <span class="badge
+                        {% if req.status == 'Applied' %}bg-warning text-dark
+                        {% elif req.status == 'Reviewing' %}bg-info text-dark
+                        {% elif req.status == 'Approved' %}bg-success
+                        {% elif req.status == 'Rejected' %}bg-danger
+                        {% elif req.status == 'Adopted' %}bg-secondary
+                        {% endif %}">
+                        {{ req.status }}
+                    </span>
+                </td>
+                <td>
+                    <a href="{% url 'track_adoption_status' req.id %}" class="btn btn-sm btn-primary">Track Status</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <div class="alert alert-info text-center mt-4">You haven’t made any adoption requests yet.</div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% include 'header.html' %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/chat.css' %}">
+<div class="container mt-5">
+    <h3 class="text-center mb-4">Chat about: {{ pet.name }}</h3>
+
+    <div class="chat-box border rounded p-3 mb-3" style="height:400px; overflow-y:scroll; background:#f8f9fa;">
+        {% for msg in messages %}
+            {% if msg.sender == user %}
+                <!-- Sent messages on the right -->
+                <div class="d-flex justify-content-end mb-2">
+                    <div class="bg-success text-white p-2 rounded" style="max-width:70%;">
+                        {{ msg.content }}
+                        <div class="text-end"><small>{{ msg.timestamp|date:"H:i" }}</small></div>
+                    </div>
+                </div>
+            {% else %}
+                <!-- Received messages on the left -->
+                <div class="d-flex justify-content-start mb-2">
+                    <div class="bg-secondary text-white p-2 rounded" style="max-width:70%;">
+                        <strong>{{ msg.sender.username }}:</strong> {{ msg.content }}
+                        <div class="text-end"><small>{{ msg.timestamp|date:"H:i" }}</small></div>
+                    </div>
+                </div>
+            {% endif %}
+        {% empty %}
+            <p class="text-center text-muted">No messages yet. Start the conversation!</p>
+        {% endfor %}
+    </div>
+
+    <!-- Message input -->
+    <form method="post" class="mt-3">
+        {% csrf_token %}
+        <div class="input-group">
+            <textarea name="content" class="form-control" rows="2" placeholder="Type your message..."></textarea>
+            <button type="submit" class="btn btn-success">Send</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    // Auto-scroll to bottom
+    const chatBox = document.querySelector('.chat-box');
+    if(chatBox) {
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }
+</script>

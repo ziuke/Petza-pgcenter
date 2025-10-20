@@ -1,0 +1,68 @@
+
+
+/* Heading */
+h3.text-center {
+    background-color: #d0e7ff; /* light blue */
+    color: #28a745; /* green */
+    text-align: center;
+    padding: 15px;
+    border-radius: 8px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* List group */
+.list-group-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    transition: background-color 0.3s ease;
+}
+
+.list-group-item:hover {
+    background-color: #e2f0ff;
+}
+
+/* Pet image */
+.list-group-item img,
+.list-group-item div.bg-secondary {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Pet name and small text */
+.list-group-item strong {
+    font-weight: 600;
+}
+
+.list-group-item small {
+    font-size: 0.8rem;
+    color: #6c757d;
+}
+
+/* Message snippet box */
+.list-group-item .text-end small {
+    display: block;
+    text-align: right;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .list-group-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .list-group-item .text-end {
+        text-align: left;
+        margin-top: 5px;
+    }
+}

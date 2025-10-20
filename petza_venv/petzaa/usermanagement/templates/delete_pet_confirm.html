@@ -1,8 +1,18 @@
 {% load static %}
 {% include 'header.html' %}
-<h3>Are you sure you want to delete {{ pet.name }}?</h3>
-<form method="POST">
-    {% csrf_token %}
-    <button type="submit" class="btn btn-danger">Yes, Delete</button>
-    <a href="{% url 'my_pets' %}" class="btn btn-secondary">Cancel</a>
-</form>
+<link rel="stylesheet" href="{% static 'css/confirm_delete.css' %}">
+
+{% block content %}
+<div class="confirm-page">
+  <div class="confirm-box">
+    <h3 class="confirm-title">Are you sure you want to delete <span>{{ pet.name }}</span>?</h3>
+    <form method="POST" action="{% url 'delete_pet' pet.pet_id %}">
+      {% csrf_token %}
+      <div class="button-group">
+        <button type="submit" class="btn-delete">Yes, Delete</button>
+        <a href="{% url 'my_pets' %}" class="btn-cancel">Cancel</a>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

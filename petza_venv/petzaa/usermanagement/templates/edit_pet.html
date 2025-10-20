@@ -1,21 +1,24 @@
 {% include 'header.html' %}
 {% load static %}
+<link rel="stylesheet" href="{% static 'css/edit_pet.css' %}">
 
 {% block content %}
-<div class="container mt-5">
-    <h2 class="mb-4">
-        {% if pet %}Edit Pet: {{ pet.name }}{% else %}Add New Pet{% endif %}
-    </h2>
+<!-- Center the form box with proper top space for header -->
+<div class="form-page">
+    <div class="form-box">
+        <h2 class="form-title">
+            {% if pet %}Edit Pet: {{ pet.name }}{% else %}Add New Pet{% endif %}
+        </h2>
 
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
 
-        <!-- Display form fields nicely with Bootstrap -->
-        {{ form.as_p }}
-
-        <!-- Submit Button -->
-        <button type="submit" class="btn btn-success">Save</button>
-        <a href="{% url 'my_pets' %}" class="btn btn-secondary ml-2">Cancel</a>
-    </form>
+            <div class="btn-group">
+                <button type="submit" class="btn btn-success">Save</button>
+                <a href="{% url 'my_pets' %}" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
 </div>
 {% endblock %}

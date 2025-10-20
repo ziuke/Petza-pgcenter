@@ -1,0 +1,85 @@
+/* Container spacing */
+
+
+/* Page heading */
+h2 {
+    background-color: #cce5ff; /* Light blue background */
+    color: #2e8b57; /* Green text */
+    text-align: center;
+    padding: 15px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+/* Center and style Add New Pet button */
+a.btn-primary {
+    display: block;
+    width: 200px;
+    margin: 20px auto;
+    background-color: #28a745; /* Green */
+    border-color: #28a745;
+    color: white;
+    font-weight: bold;
+    border-radius: 8px;
+    text-align: center;
+    transition: 0.3s;
+}
+
+a.btn-primary:hover {
+    background-color: #218838; /* Darker green */
+}
+
+/* Table styling */
+.table {
+    background-color: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Table header */
+.table thead th {
+    background-color: #cce5ff; /* Light blue */
+    color: #2e8b57; /* Green text */
+    text-align: center;
+    font-weight: 600;
+}
+
+/* Table rows */
+.table tbody td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* Pet image */
+.table img {
+    border-radius: 6px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+/* Edit button - medium green */
+.btn-warning {
+    background-color: #32cd32; /* Lime green */
+    border: none;
+    color: white;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.btn-warning:hover {
+    background-color: #28a745; /* Darker green */
+}
+
+/* Delete button - lighter green */
+.btn-danger {
+    background-color: #90ee90; /* Light green */
+    border: none;
+    color: #004d00;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.btn-danger:hover {
+    background-color: #76c776;
+    color: white;
+}

@@ -1,0 +1,133 @@
+{% load static %}
+{% include 'header.html' %}
+<br></br>
+<div class="container mt-4">
+    <h2 class="text-center text-success mb-4">Adoption Dashboard</h2>
+    <style>
+        h2.text-success {
+    background-color: #d0e7ff; /* light blue rectangle background */
+    color: #28a745; /* green text */
+    padding: 15px 25px;
+    border-radius: 8px;
+    display: block; /* make it block-level */
+    margin: 0 auto; /* centers the block */
+    text-align: center;
+    font-weight: 700;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: fit-content; /* keeps it nicely shaped */
+}
+
+/* Center the heading wrapper */
+.text-center {
+    text-align: center;
+}
+
+/* Add spacing below */
+.mb-4 {
+    margin-bottom: 1.5rem;
+}
+
+    </style>
+    <!-- Status Cards Above Pie Chart -->
+    <div class="d-flex justify-content-center flex-wrap mb-3">
+        {% for status, count in counts.items %}
+            <div class="status-card
+                {% if status == 'Applied' %}bg-applied
+                {% elif status == 'Reviewing' %}bg-reviewing
+                {% elif status == 'Approved' %}bg-approved
+                {% elif status == 'Rejected' %}bg-rejected
+                {% elif status == 'Adopted' %}bg-adopted{% endif %}">
+                <strong>{{ status }}</strong><br>
+                {{ count }}/{{ total_requests }}
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- Pie Chart Medium Size -->
+    <div class="d-flex justify-content-center">
+        <div style="width: 400px; height: 400px;">
+            <canvas id="adoptionPieChart"></canvas>
+        </div>
+    </div>
+</div>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+const ctx = document.getElementById('adoptionPieChart').getContext('2d');
+
+const data = {
+    labels: ['Applied', 'Reviewing', 'Approved', 'Rejected', 'Adopted'],
+    datasets: [{
+        data: [
+            {{ counts.Applied }},
+            {{ counts.Reviewing }},
+            {{ counts.Approved }},
+            {{ counts.Rejected }},
+            {{ counts.Adopted }}
+        ],
+        backgroundColor: [
+            'rgba(255, 206, 86, 0.7)',   // Applied → Yellow
+            'rgba(54, 162, 235, 0.7)',   // Reviewing → Blue
+            'rgba(75, 192, 75, 0.7)',    // Approved → Green
+            'rgba(255, 99, 132, 0.7)',   // Rejected → Red
+            'rgba(169, 169, 169, 0.7)'   // Adopted → Grey
+        ],
+        borderColor: [
+            'rgba(255, 206, 86, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(75, 192, 75, 1)',
+            'rgba(255, 99, 132, 1)',
+            'rgba(169, 169, 169, 1)'
+        ],
+        borderWidth: 1
+    }]
+};
+
+const total = {{ total_requests }};
+
+const options = {
+    responsive: true,
+    plugins: {
+        legend: { position: 'bottom', labels: { font: { size: 12 } } },
+        tooltip: {
+            callbacks: {
+                label: function(context) {
+                    const label = context.label || '';
+                    const value = context.raw;
+                    const percentage = total ? ((value / total) * 100).toFixed(1) : 0;
+                    return `${label}: ${value} (${percentage}%)`;
+                }
+            }
+        }
+    },
+    maintainAspectRatio: false
+};
+
+new Chart(ctx, { type: 'pie', data: data, options: options });
+</script>
+
+<style>
+/* Status Cards Colors */
+.bg-applied { background-color: #ffce56 !important; color: #000; }       /* Yellow */
+.bg-reviewing { background-color: #36a2eb !important; color: #fff; }     /* Blue */
+.bg-approved { background-color: #4bc075 !important; color: #fff; }      /* Green */
+.bg-rejected { background-color: #ff6384 !important; color: #fff; }      /* Red */
+.bg-adopted { background-color: #a9a9a9 !important; color: #fff; }       /* Grey */
+
+/* Compact Status Cards */
+.status-card {
+    min-width: 80px;
+    margin: 3px;
+    padding: 6px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+/* Container adjustments */
+.d-flex.flex-wrap {
+    gap: 5px;
+}
+</style>

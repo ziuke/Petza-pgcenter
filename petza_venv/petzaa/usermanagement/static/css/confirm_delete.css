@@ -1,0 +1,75 @@
+/* Full page centered layout */
+.confirm-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Full page height */
+    background-color: #f5faff; /* soft light background */
+    padding-top: 80px; /* ensures no overlap with header */
+}
+
+/* Confirmation box */
+.confirm-box {
+    background-color: #e6f2ff; /* light blue box */
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    padding: 40px 30px;
+    width: 450px;
+    max-width: 90%;
+}
+
+/* Title inside box */
+.confirm-title {
+    color: #28a745; /* green text */
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+/* Pet name highlighted */
+.confirm-title span {
+    color: #1e7e34;
+}
+
+/* Button container */
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* Delete button (greenish red tone) */
+.btn-delete {
+    background-color: #dc3545; /* red */
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-delete:hover {
+    background-color: #c82333;
+    transform: scale(1.05);
+}
+
+/* Cancel button (light green) */
+.btn-cancel {
+    background-color: #a8e6a3; /* light green */
+    color: #155724;
+    text-decoration: none;
+    padding: 10px 25px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.btn-cancel:hover {
+    background-color: #81d87a;
+    transform: scale(1.05);
+}
